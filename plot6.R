@@ -37,6 +37,9 @@ ggplot(tidynei,aes(x=year,y=tons,colour=City))+
        y="PM2.5 emission",
        title="PM2.5 emission from mobile sources")+
   facet_wrap(~emissions,scales = "free_y")+
-  theme_light(base_size=15)
+  theme(plot.title=element_text( colour="red",vjust=2,size=16),
+        plot.background = element_rect(fill = "transparent"),
+        panel.background=element_rect(fill='transparent', color='gray50'),
+        strip.background=element_rect( color='gray50'))
 
 dev.off()
