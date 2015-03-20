@@ -1,4 +1,6 @@
 #plot5
+#How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City
+
 
 nei <- readRDS("./data/summarySCC_PM25.rds")
 # str(nei)
@@ -6,10 +8,12 @@ nei <- readRDS("./data/summarySCC_PM25.rds")
 scc <- readRDS("./data/Source_Classification_Code.rds")
 # str(scc)
 library(dplyr)
+#I just make thing simple to select from rows that have "Mobile Sources" in SCC.Level.One
 mobilefilter <- filter(scc,SCC.Level.One=="Mobile Sources") %>%
   select(SCC,SCC.Level.One)
 
-
+#filter the nei rows which SCC was contian in mobilefilter$SCC and 
+#fips==24510
 mobilenei <- filter(nei,SCC %in% mobilefilter$SCC,fips=="24510") %>%
   group_by(year) %>%
   summarise(totalemission = sum(Emissions)/1000)

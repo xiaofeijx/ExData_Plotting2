@@ -1,4 +1,9 @@
 #plot2
+#Have total emissions from PM2.5 decreased in the Baltimore City, 
+#Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system 
+#to make a plot answering this question.
+
+
 nei <- readRDS("./data/summarySCC_PM25.rds")
 
 scc <- readRDS("./data/Source_Classification_Code.rds")
@@ -18,7 +23,7 @@ plot(marygroupbyyear$year,marygroupbyyear$totalemission,
      type="b",
      lty=3,
      pch=19,
-     main="Total PM2.5 emission in Maryland,Baltimore City",
+     main="Total PM2.5 emission in Baltimore City,Maryland",
      xlab="year",
      ylab="PM2.5 emission(tons)")
 
