@@ -1,17 +1,21 @@
 #plot4
+#Across the United States, how have emissions from coal combustion-related 
+#sources changed from 1999–2008?
+
 nei <- readRDS("./data/summarySCC_PM25.rds")
 # str(nei)
 
 scc <- readRDS("./data/Source_Classification_Code.rds")
-# str(scc)
+
+# find rows where the variable SCC.Level.Three   have "Coal" in it
 coalfilter <- grep("Coal",scc$SCC.Level.Three)
-# head(scc, 50)
-table(scc$SCC.Level.One)
- table(scc$SCC.Level.Two)
-table(nei$Pollutant)
+
 
 library(dplyr)
+#filter SCC according coalfilter 
 coalscc <- scc[coalfilter,c("SCC","SCC.Level.Three")]
+
+##filter nei according SCC code that is in coalscc$SCC
 coalnei <- filter(nei,SCC %in% coalscc$SCC) %>%
   group_by(year) %>%
   summarise(totalemission = sum(Emissions)/10000)
